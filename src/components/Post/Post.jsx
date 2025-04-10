@@ -7,7 +7,8 @@ import styles from './Post.module.css'
 import { useState } from 'react';
 
 export function Post({ author, content, publishedAt}){
-const [comments, setComments] = useState([ 1 ])
+const [comments, setComments] = useState([ 'Post Bacana Maykão' ])
+const [newCommentText, setNewCommentText] = useState('')
 
 const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
   locale: ptBR,
@@ -20,9 +21,14 @@ const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
 
 function handleCreateNewContent() {
   event.preventDefault();
-
-  setComments([...comments, comments.length + 1]);
+  setComments([...comments, newCommentText]);
+  setNewCommentText('');
 }
+
+function handleNewCommentChange(){
+  setNewCommentText(event.target.value)
+}
+
  return(
   <article className={styles.post}>
    <header>
@@ -51,8 +57,11 @@ function handleCreateNewContent() {
    <form onSubmit={handleCreateNewContent} className={styles.commentForm}>
     <strong>Deixe seu feedback</strong>
 
-    <textarea 
+    <textarea
+     name="comment"
+     value={newCommentText}
      placeholder="Deixe um comentário"
+     onChange={handleNewCommentChange}
     />
     
     <footer>
@@ -62,7 +71,11 @@ function handleCreateNewContent() {
 
    <section className={styles.commentList}>
      {comments.map(comment => {
-        return <Comment />
+        return (
+        <Comment 
+        content={comment}
+        />
+      )
      })}
    </section>
   </article>
