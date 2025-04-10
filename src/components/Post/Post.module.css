@@ -120,3 +120,7 @@
 .post + .post {
  margin-top: 2rem;
 }
+
+.commentList {
+ margin-top: 2rem;
+}
