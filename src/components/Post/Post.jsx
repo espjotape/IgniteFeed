@@ -37,6 +37,8 @@ function deleteComment(commentToDelete) {
   setComments(commentsWithoutDeletedOne)
 }
 
+const isNewCommentEmpty = newCommentText.length === 0;
+
  return(
   <article className={styles.post}>
    <header>
@@ -73,7 +75,11 @@ function deleteComment(commentToDelete) {
     />
     
     <footer>
-     <button type='submit'>Publicar</button>
+     <button 
+      type='submit' 
+      disabled={isNewCommentEmpty}>
+      Publicar
+     </button>
     </footer>
    </form>
 
