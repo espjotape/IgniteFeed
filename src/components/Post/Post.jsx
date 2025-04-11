@@ -29,6 +29,14 @@ function handleNewCommentChange(){
   setNewCommentText(event.target.value)
 }
 
+function deleteComment(commentToDelete) {
+  const commentsWithoutDeletedOne = comments.filter(comment => {
+    return comment !== commentToDelete;
+  })
+
+  setComments(commentsWithoutDeletedOne)
+}
+
  return(
   <article className={styles.post}>
    <header>
@@ -75,6 +83,7 @@ function handleNewCommentChange(){
         <Comment
         key={content}
         content={comment}
+        OnDeleteComment={deleteComment}
         />
       )
      })}
